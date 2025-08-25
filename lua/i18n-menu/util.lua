@@ -50,7 +50,7 @@ function M.get_project_root()
   local current_dir = fn.fnamemodify(current_file, ":p:h")
 
   -- Define the markers to identify the project root
-  local markers = { ".git", "package.json", "i18n.conf" }
+  local markers = { ".git", "package.json", "i18n.conf", "locales" }
 
   local function is_project_root(dir)
     for _, marker in ipairs(markers) do
@@ -119,7 +119,7 @@ function M.get_messages_dir()
   end
 
   local messages_dir = config and config.messages_dir and project_root .. config.messages_dir or
-      project_root .. "/messages"
+      project_root .. "/locales"
 
   if not M.directory_exists(messages_dir) then
     return nil
