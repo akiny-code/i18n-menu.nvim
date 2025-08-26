@@ -10,9 +10,6 @@ Using Lazy
 ```lua
 {
   "felipejz/i18n-menu.nvim",
-  dependencies = {
-    "smjonas/snippet-converter.nvim",
-  },
   config = function()
     require("i18n-menu").setup()
     vim.keymap.set("n", "<leader>ii", ":TranslateMenu<cr>")
@@ -33,11 +30,10 @@ i18n.json - This optional config file should be located in the project_root and 
 
 ```JSON
 {
-    "function_name": "t",
-    "messages_dir": "/messages",
+    "function_name": "_t",
+    "messages_dir": "/locales",
     "default_lang": "en",
     "skip_lang_select": false
-
 }
 ```
 

@@ -2,9 +2,7 @@ local api = vim.api
 local fn = vim.fn
 local M = {}
 local ts = vim.treesitter
-local json = require("snippet_converter.utils.json_utils")
 local dig = require("i18n-menu.dig")
-local json_util = require("i18n-menu.json_util")
 local smart_default = require("i18n-menu.smart_default")
 
 function M.load_translations(file)
@@ -33,15 +31,15 @@ function M.load_translations(file)
 end
 
 function M.save_translations(file, translations)
-  local order = json_util.keys_order(file)
-
-  local f = io.open(file, "w")
+  local tmp = os.tmpname()
+  local f = io.open(tmp, "w")
   if f == nil then
     return false
   end
-  local prettyContent = json:pretty_print(translations, order, true)
-  f:write(prettyContent)
+  f:write(vim.json.encode(translations))
   f:close()
+  os.execute("jq -S . "..tmp.." > "..file)
+  os.remove(tmp)
   return true
 end
 
