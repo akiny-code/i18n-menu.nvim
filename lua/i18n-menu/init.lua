@@ -132,7 +132,10 @@ function M.show_translation_menu()
     local language = fn.fnamemodify(file, ":t:r")
     local translations = util.load_translations(file)
     local current_translation = dig.dig(translations, translation_key)
-    local status = current_translation and current_translation or "------"
+    if current_translation and type(current_translation) == 'table' then
+      current_translation = 'WARN: Current translation is object!'
+    end
+    local status = current_translation or "------"
 
     local choice = {
       language = language,
