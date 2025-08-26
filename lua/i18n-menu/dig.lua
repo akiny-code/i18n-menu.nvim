@@ -5,7 +5,7 @@ local function path_hd(path)
 end
 
 function M.dig(table, path)
-  if not path or not table or type(table) ~= "table" then
+  if path == '' or not table or type(table) ~= "table" then
     return table
   end
 
