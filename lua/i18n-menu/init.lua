@@ -133,7 +133,7 @@ function M.show_translation_menu()
     local translations = util.load_translations(file)
     local current_translation = dig.dig(translations, translation_key)
     if current_translation and type(current_translation) == 'table' then
-      current_translation = 'WARN: Current translation is object!'
+      current_translation = 'WARNING: CURRENT TRANSLATION IS AN OBJECT!'
     end
     local status = current_translation or "------"
 
