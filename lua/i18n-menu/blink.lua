@@ -40,7 +40,20 @@ function M:get_completions(ctx, callback)
     end
     if translations and type(translations) == 'table' then
       for label, value in pairs(translations) do
-        if type(value) == 'table' then value = '{}' end
+        if type(value) == 'table' then
+          local doc = '{\n'
+          local i = 1
+          for k, v in pairs(value) do
+            if i > 8 then
+              doc = doc .. '  ...\n'
+              break
+            end
+            if type(v) == 'table' then v = '{...}' end
+            doc = doc .. '  ' .. k .. ': ' .. v .. '\n'
+            i = i + 1
+          end
+          value = doc .. '}'
+        end
         table.insert(items, {
           label = label,
           documentation = {
