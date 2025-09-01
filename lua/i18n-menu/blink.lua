@@ -34,7 +34,8 @@ function M:get_completions(ctx, callback)
     start = start-1
   end
   if found then
-    local translations = util.load_translations(util.get_messages_dir() .. '/en.json')
+    local dir = util.get_messages_dir()
+    local translations = dir and util.load_translations(dir .. '/en.json')
     if start < pos then
       translations = dig.dig(translations, string.sub(ctx.line, start+1, pos))
     end
